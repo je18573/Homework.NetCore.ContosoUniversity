@@ -83,11 +83,13 @@ namespace Homework.NetCore.ContosoUniversity.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            await _context.Database.ExecuteSqlInterpolatedAsync(
+            var insertedResult = await _context.SpDepartmentInsertResults.FromSqlInterpolated(
                 $"EXEC [dbo].[Department_Insert] {department.Name}, {department.Budget}, {department.StartDate}, {department.InstructorId} "
-            );
+            ).Select(s => s.DepartmentId).ToListAsync();
 
-            return CreatedAtAction("GetDepartment", new { id = department.DepartmentId }, department);
+            department.DepartmentId = insertedResult.First();
+            
+            return CreatedAtAction("GetDepartment", new {id = department.DepartmentId }, department);
         }
 
         // DELETE: api/Departments/5

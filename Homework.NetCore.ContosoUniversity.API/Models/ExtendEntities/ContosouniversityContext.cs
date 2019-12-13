@@ -8,6 +8,15 @@ namespace Homework.NetCore.ContosoUniversity.API.Models
 {
     public partial class ContosouniversityContext
     {
+        /// <summary>
+        /// Gets or sets the sp department insert results.
+        /// 預存程序-部門新增後回傳的結果
+        /// </summary>
+        /// <value>
+        /// The sp department insert results.
+        /// </value>
+        public virtual DbSet<SpDepartmentInsertResult> SpDepartmentInsertResults { get; set; }
+
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Person>().HasQueryFilter(p => !p.IsDeleted);
