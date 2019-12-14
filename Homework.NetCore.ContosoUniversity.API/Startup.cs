@@ -1,10 +1,14 @@
 using Homework.NetCore.ContosoUniversity.API.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
+// namespace本身不能加Attribute，以下這行加在哪都可以，但放 Startup 比較容易查找
+[assembly: ApiConventionType(typeof(DefaultApiConventions))]
 
 namespace Homework.NetCore.ContosoUniversity.API
 {

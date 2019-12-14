@@ -1,4 +1,5 @@
 ﻿using Homework.NetCore.ContosoUniversity.API.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 namespace Homework.NetCore.ContosoUniversity.API.Controllers
 {
     [Route("api/[controller]")]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     [ApiController]
     public class CourseInstructorsController : ControllerBase
     {
@@ -31,6 +33,9 @@ namespace Homework.NetCore.ContosoUniversity.API.Controllers
 
         // GET: api/CourseInstructors/5/5
         [HttpGet("{courseId}/{instructorId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<CourseInstructor>> GetCourseInstructor(int courseId, int instructorId)
         {
             var courseInstructor = await _context.CourseInstructor.FindAsync(courseId, instructorId);
@@ -47,6 +52,10 @@ namespace Homework.NetCore.ContosoUniversity.API.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{courseId}/{instructorId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesDefaultResponseType]
         public async Task<IActionResult> PutCourseInstructor(int courseId, int instructorId, 
             CourseInstructor courseInstructor)
         {
@@ -147,6 +156,9 @@ namespace Homework.NetCore.ContosoUniversity.API.Controllers
 
         // DELETE: api/CourseInstructors/5/5
         [HttpDelete("{courseId}/{instructorId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<CourseInstructor>> DeleteCourseInstructor(int courseId, int instructorId)
         {
             var courseInstructor = await _context.CourseInstructor.FindAsync(courseId, instructorId);

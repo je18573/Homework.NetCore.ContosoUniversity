@@ -3,6 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup>
+   <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
+  </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="Migrations\20191210143057_AddDateModified_Person_Department_Course.cs" />

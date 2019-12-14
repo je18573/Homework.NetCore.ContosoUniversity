@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 namespace Homework.NetCore.ContosoUniversity.API.Controllers
 {
     [Route("api/[controller]")]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     [ApiController]
     public class CoursesController : ControllerBase
     {

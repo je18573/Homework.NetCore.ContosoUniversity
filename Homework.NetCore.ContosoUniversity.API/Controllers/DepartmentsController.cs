@@ -5,10 +5,12 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace Homework.NetCore.ContosoUniversity.API.Controllers
 {
     [Route("api/[controller]")]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     [ApiController]
     public class DepartmentsController : ControllerBase
     {

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace Homework.NetCore.ContosoUniversity.API.Controllers
 {
     [Route("api/[controller]")]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     [ApiController]
     public class OfficeAssignmentsController : ControllerBase
     {
