@@ -102,7 +102,7 @@ namespace Homework.NetCore.ContosoUniversity.API.Controllers
                 throw;
             }
 
-            return CreatedAtAction("GetOfficeAssignment", new { id = officeAssignment.InstructorId }, officeAssignment);
+            return CreatedAtAction(nameof(GetOfficeAssignment), new { id = officeAssignment.InstructorId }, officeAssignment);
         }
 
         // DELETE: api/OfficeAssignments/5

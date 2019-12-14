@@ -151,7 +151,7 @@ namespace Homework.NetCore.ContosoUniversity.API.Controllers
                 throw;
             }
 
-            return CreatedAtAction("GetCourseInstructor", new { id = courseInstructor.CourseId }, courseInstructor);
+            return CreatedAtAction(nameof(GetCourseInstructor), new { id = courseInstructor.CourseId }, courseInstructor);
         }
 
         // DELETE: api/CourseInstructors/5/5

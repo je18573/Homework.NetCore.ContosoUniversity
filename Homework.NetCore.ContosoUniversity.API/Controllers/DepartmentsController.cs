@@ -91,7 +91,7 @@ namespace Homework.NetCore.ContosoUniversity.API.Controllers
 
             department.DepartmentId = insertedResult.First();
             
-            return CreatedAtAction("GetDepartment", new {id = department.DepartmentId }, department);
+            return CreatedAtAction(nameof(GetDepartment), new {id = department.DepartmentId }, department);
         }
 
         // DELETE: api/Departments/5
