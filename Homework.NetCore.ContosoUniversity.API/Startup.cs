@@ -42,6 +42,10 @@ namespace Homework.NetCore.ContosoUniversity.API
                 app.UseDeveloperExceptionPage();
             }
 
+            // 若有任何例外錯誤的導向
+            app.UseExceptionHandler("/error");
+
+
             app.UseHttpsRedirection();
 
             app.UseRouting();

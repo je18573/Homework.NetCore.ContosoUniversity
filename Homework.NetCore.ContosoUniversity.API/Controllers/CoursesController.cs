@@ -1,13 +1,12 @@
 ﻿using Homework.NetCore.ContosoUniversity.API.Models;
+using Homework.NetCore.ContosoUniversity.API.Models.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Homework.NetCore.ContosoUniversity.API.Models.ViewModels;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Http;
 
 namespace Homework.NetCore.ContosoUniversity.API.Controllers
 {
@@ -24,6 +23,15 @@ namespace Homework.NetCore.ContosoUniversity.API.Controllers
         {
             _context = context;
             _logger = logger;
+        }
+
+        // GET: api/Courses/ErrorTest
+        [HttpGet("ErrorTest")]
+        public async Task<ActionResult<IEnumerable<Course>>> GetCourseErrorTest()
+        {
+            var i = 0;
+            var d = 30 / i;
+            return await _context.Course.ToListAsync();
         }
 
         // GET: api/Courses
