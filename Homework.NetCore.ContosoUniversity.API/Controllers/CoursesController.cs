@@ -2,9 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Homework.NetCore.ContosoUniversity.API.Models.ViewModels;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
 
 namespace Homework.NetCore.ContosoUniversity.API.Controllers
 {
@@ -69,6 +72,53 @@ namespace Homework.NetCore.ContosoUniversity.API.Controllers
                 }
 
                 _logger.LogError("PutCourse Fail! ", ex);
+                throw;
+            }
+
+            return NoContent();
+        }
+
+        [HttpPatch("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> PatchCourse(int id, PatchCourseViewModel course)
+        {
+            var dbCourse = _context.Course.Find(id);
+            if (dbCourse == null)
+            {
+                return NotFound();
+            }
+
+            if (!await TryUpdateModelAsync(course))
+            {
+                return BadRequest();
+            }
+
+            course.Credits += 1;
+
+            if (!TryValidateModel(course))
+            {
+                return BadRequest();
+            }
+
+            dbCourse.Credits = course.Credits;
+            dbCourse.Title = course.Title;
+            _context.Entry(dbCourse).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                if (!CourseExists(id))
+                {
+                    return NotFound();
+                }
+
+                _logger.LogError("PatchCourse Fail! ", ex);
                 throw;
             }
 
